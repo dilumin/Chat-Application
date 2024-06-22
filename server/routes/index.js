@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const registerController = require('../controller/registerController');
 const authController = require('../controller/authController');
+const logoutController = require('../controller/logoutController');
 
 
 router.get('/', (req, res) => {
@@ -10,5 +11,6 @@ router.get('/', (req, res) => {
 
 router.post('/register' , registerController.handleNewUser);
 router.post('/login' , authController.handleAuth);
-
+// router.post('/refresh' , authController.handleRefresh);
+router.post('/logout' , logoutController.handleLogout);
 exports.router = router;

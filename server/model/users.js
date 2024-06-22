@@ -30,9 +30,29 @@ async function createNewUser(username, email, password) {
     
 }
 
-async function addRefreshToken(email , refreshToken){
+
+
+async function addRefreshToken(userID , refreshToken){
     try{
-        const user = await db.query('UPDATE users SET refreshToken = ? WHERE email = ?' , [refreshToken , email]);
+        const user = await db.query('INSERT INTO refreshtokens (user_id, refresh_token) VALUES (? , ?);' , [userID , refreshToken]);
+        return user[0];
+    }catch(error){
+        console.log(error);
+    }
+}
+
+async function getRefreshToken(token){
+    try{
+        const RTU = await db.query('SELECT user_id FROM refreshtokens WHERE refresh_token = ?' , [token]);
+        return RTU[0];
+    }catch(error){
+        console.log(error);
+    }
+}
+
+async function deleteRefreshToken(token){
+    try{
+        const user = await db.query('DELETE FROM refreshtokens WHERE refresh_token = ? ' , [ token]);
         return user[0];
     }catch(error){
         console.log(error);
@@ -43,4 +63,4 @@ async function addRefreshToken(email , refreshToken){
 
 
 
-module.exports = { getUsers , getUserbyEmail , createNewUser , addRefreshToken };
+module.exports = { getUsers , getUserbyEmail , createNewUser , addRefreshToken , getRefreshToken ,deleteRefreshToken };

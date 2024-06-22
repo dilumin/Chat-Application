@@ -1,6 +1,11 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const path = require('path');
+
 const { addRefreshToken } = require('../model/users');
+require('dotenv').config( {path:path.resolve(__dirname,'../.env')})
+
+
 
 const handleAuth = async (req, res) => {
     const email = req.body.email;
@@ -29,7 +34,8 @@ const handleAuth = async (req, res) => {
             {expiresIn: '1d'}
         );
 
-        await addRefreshToken(email, RefreshToken).catch((error) => {
+
+        await addRefreshToken(user.user_id, RefreshToken).catch((error) => {
             console.log("Error adding refresh token", error);
         });
         res.cookie('RefreshToken', RefreshToken, {httpOnly: true ,  sameSite:'None',secure:'false' ,maxAge: 24 * 60 * 60 * 1000});
