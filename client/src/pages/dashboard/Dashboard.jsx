@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import useAxiosInstance from '../../hooks/useAxiosInstance'; // Adjust the path as per your project structure
 import ContactList from './components/ContactList';
+import AddFriends from './components/AddFriends';
 
 const Dashboard = () => {
     const axiosInstance = useAxiosInstance();
@@ -21,7 +22,8 @@ const Dashboard = () => {
     return (
         <div>
             <ContactList />
-            <form onSubmit={handleSubmit}>
+            <AddFriends/>
+            {/* <form onSubmit={handleSubmit}>
                 <label>
                     Message:
                     <input
@@ -32,7 +34,7 @@ const Dashboard = () => {
                 </label>
                 <button type="submit">Send</button>
             </form>
-            {response && <div>Response: {response}</div>}
+            {response && <div>Response: {response}</div>} */}
         </div>
     );
 };

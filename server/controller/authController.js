@@ -15,7 +15,7 @@ const handleAuth = async (req, res) => {
         return;
     }
     const [user] = await getUserbyEmail(email);
-    if (user.length === 0) {
+    if (!user) {
         res.status(404).json({message: 'User not found'});
         return;
     }

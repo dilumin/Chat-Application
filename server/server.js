@@ -6,7 +6,7 @@ const corsOptions = require('./middleware/cors');
 const Credentials = require('./middleware/credentials');
 const cookieParser = require('cookie-parser');
 const {router} = require('./routes/index');
-const { app } = require('./socket/socket');
+const { app  , server } = require('./socket/socket');
 const verifyJWT = require('./middleware/verifyJWT');
 
 
@@ -23,7 +23,7 @@ app.use(cookieParser());
 
 app.use('/', router);
 
-app.use(verifyJWT)
+// app.use(verifyJWT)
 app.post('/test', (req, res) => {
     console.log(req.body);
     res.status(200).json({message: 'fuck yaa'});
@@ -34,7 +34,7 @@ app.get('/*', (req, res) => {
 });
 
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
 

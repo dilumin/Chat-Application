@@ -4,6 +4,7 @@ const registerController = require('../controller/registerController');
 const authController = require('../controller/authController');
 const logoutController = require('../controller/logoutController');
 const refreshController = require('../controller/refreshController');
+const friendsController = require('../controller/friendsController')
 
 
 router.get('/', (req, res) => {
@@ -14,4 +15,10 @@ router.post('/register' , registerController.handleNewUser);
 router.post('/login' , authController.handleAuth);
 router.post('/refresh' , refreshController.handleRefresh );
 router.post('/logout' , logoutController.handleLogout);
+
+router.post('/getPerson' , friendsController.getPeople );
+
+router.post('/reqFriends' , friendsController.getFriends );
+
+
 exports.router = router;

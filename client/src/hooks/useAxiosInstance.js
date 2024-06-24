@@ -62,7 +62,6 @@ const useAxiosInstance = () => {
 
     axiosInstance.interceptors.response.use(
         (response) => {
-            console.log("\nResponse came as useAxios Instance\n: ", response);
             return response;
         },
         async (error) => {

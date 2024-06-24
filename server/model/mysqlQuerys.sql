@@ -36,12 +36,30 @@ CREATE TABLE Group_Members (
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
- CREATE TABLE IF NOT EXISTS RefreshTokens (
+CREATE TABLE IF NOT EXISTS RefreshTokens (
             user_id INT,
             refresh_token VARCHAR(255) NOT NULL,
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
+
+CREATE TABLE IF NOT EXISTS FriendList (
+            user_id INT,
+            friend_id INT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+            FOREIGN KEY (user_id) REFERENCES Users(user_id),
+            FOREIGN KEY (friend_id) REFERENCES Users(user_id)
+);
+
+CREATE TABLE IF NOT EXISTS FriendRequests (
+            user_email VARCHAR(100),
+            friend_email VARCHAR(100),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            FOREIGN KEY (user_email) REFERENCES Users(email),
+            FOREIGN KEY (friend_email) REFERENCES Users(email)
+
+);
+
 
 
 
