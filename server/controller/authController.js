@@ -2,7 +2,7 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const path = require('path');
 
-const { addRefreshToken } = require('../model/users');
+const { addRefreshToken , getUserbyEmail } = require('../model/users');
 require('dotenv').config( {path:path.resolve(__dirname,'../.env')})
 
 
@@ -14,11 +14,12 @@ const handleAuth = async (req, res) => {
         res.status(400).json({message: 'Please provide all required fields'});
         return;
     }
-    const user = await getUserbyEmail(email);
+    const [user] = await getUserbyEmail(email);
     if (user.length === 0) {
         res.status(404).json({message: 'User not found'});
         return;
     }
+    // console.log(password,"   ", user.password);
     if (!await bcrypt.compare(password, user.password)) {
         return res.status(401).json({message: 'Invalid credentials'});
     }
@@ -26,7 +27,7 @@ const handleAuth = async (req, res) => {
         const AccessToken = jwt.sign(
             {email: user.email}
             , process.env.ACCESS_TOKEN_SECRET
-            , {expiresIn: '10m'}
+            , {expiresIn: '40m'}
         );
         const RefreshToken = jwt.sign(
             {email: user.email}

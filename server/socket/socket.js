@@ -8,13 +8,20 @@ const io = new Server(server
     , {
         cors: {
             origin: "http://localhost:3000",
-            methods: ["GET", "POST"]
+            methods: ["GET", "POST"],
+            credentials: true
         }
     }
 );
 
 io.on('connection', (socket) => {
     console.log('a user connected ' , socket.id);
+
+    const token = socket.handshake.auth.token;
+
+
+
+
 })
 
 io.on('disconnect', (socket) => {

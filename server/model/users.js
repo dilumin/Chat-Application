@@ -50,6 +50,18 @@ async function getRefreshToken(token){
     }
 }
 
+async function getUserfromRefreshToken(token){
+    
+    const user1 = await getRefreshToken(token).then(async (userID) =>  {
+        const user = await db.query('SELECT * FROM users WHERE user_id = ?' , [userID[0]?.user_id]);
+        console.log("The user is :" , user[0]);
+        return user[0];
+    }).catch((error) => {
+        console.log(error);
+    });
+    return user1;
+}
+
 async function deleteRefreshToken(token){
     try{
         const user = await db.query('DELETE FROM refreshtokens WHERE refresh_token = ? ' , [ token]);
@@ -63,4 +75,4 @@ async function deleteRefreshToken(token){
 
 
 
-module.exports = { getUsers , getUserbyEmail , createNewUser , addRefreshToken , getRefreshToken ,deleteRefreshToken };
+module.exports = { getUsers , getUserbyEmail , createNewUser , addRefreshToken , getRefreshToken ,deleteRefreshToken , getUserfromRefreshToken };

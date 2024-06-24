@@ -19,7 +19,7 @@ const handleNewUser = async (req, res) => {
     try{
         const HashedPassword = await bcrypt.hash(password, 10);
         await createNewUser(username, email, HashedPassword).then((user) => {
-            res.status(201).json({message: 'User created', user: user})
+            res.status(201).json({Status: "Success", message: 'User created', user: user})
         }).catch((error) => {
             res.status(500).json({message: 'Could not add ', error: error})
         })
