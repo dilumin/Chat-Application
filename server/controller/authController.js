@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const path = require('path');
+const userDB = require('../model/users');
 
 const { addRefreshToken , getUserbyEmail } = require('../model/users');
 require('dotenv').config( {path:path.resolve(__dirname,'../.env')})
@@ -44,4 +45,30 @@ const handleAuth = async (req, res) => {
     }
 }
 
-module.exports = { handleAuth };
+const myinfo = async (req, res) => {
+    const accessToken = req.body.accessToken;
+    if (!accessToken) {
+        res.status(400).json({message: 'Please provide all required fields'});
+        return;
+    }
+    jwt.verify(
+        accessToken,
+        process.env.ACCESS_TOKEN_SECRET,
+        async (err, decoded) => {
+            if (err) {
+                console.log("TOKEN EXPIRED" , err)
+                res.status(403).json({message: 'Token is not valid'});
+                return;
+            }
+            const email = decoded.email;
+            const [username] = await userDB.getUserbyEmail(email);
+
+            res.status(200).json({"username": username.username , email});
+        }
+    );
+    
+    
+    
+}
+
+module.exports = { handleAuth , myinfo };

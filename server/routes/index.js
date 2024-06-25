@@ -18,7 +18,11 @@ router.post('/logout' , logoutController.handleLogout);
 
 router.post('/getPerson' , friendsController.getPeople );
 
+router.post('/getFriendRequests' , friendsController.getFriendRequests);
+router.post('/acceptFriendRequest' , friendsController.HandleFriendRequest);
+
 router.post('/reqFriends' , friendsController.getFriends );
 
+router.post('/myinfo' , authController.myinfo);
 
 exports.router = router;

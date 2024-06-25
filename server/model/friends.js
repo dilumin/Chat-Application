@@ -18,6 +18,17 @@ async function myPeople(email){
     }
 }
 
+async function addFriend(userEmail, friendEmail){
+    try{
+        await db.query("INSERT INTO friendlist (user_id, friend_id) VALUES (?, ?)", [userEmail, friendEmail]);
+
+        
+    }catch(error){
+        console.log(error);
+    }
+}
+
+
 async function friendRequestSent (userEmail , friendEmail){
     try{
         await db.query("INSERT INTO friendrequests (user_email , friend_email) VALUES (? , ?)" , [userEmail , friendEmail]);
@@ -26,6 +37,23 @@ async function friendRequestSent (userEmail , friendEmail){
         console.log(error);
     }}
 
-module.exports = {myFriends , myPeople , friendRequestSent};
+
+async function getfriendRequests(email){
+    try{
+        const requests = await db.query("SELECT user_email FROM friendrequests WHERE friend_email = ?" , [email]);
+        return requests[0];
+    }catch(error){
+        console.log(error);
+    }
+}
+async function deleteFriendRequest(userEmail, friendEmail){
+    try{
+        await db.query("DELETE FROM friendrequests WHERE user_email = ? AND friend_email = ?", [userEmail, friendEmail]);
+    }catch(error){
+        console.log(error);
+    }
+}
+
+module.exports = {myFriends , myPeople , friendRequestSent , getfriendRequests , deleteFriendRequest , addFriend };
 
 

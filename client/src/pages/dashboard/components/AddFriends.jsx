@@ -1,16 +1,18 @@
 import { Button, Checkbox, Label, Modal, TextInput } from "flowbite-react";
-import { useState } from "react";
+import { useState  } from "react";
 import { ListGroup } from "flowbite-react";
 import { useContext , useEffect } from "react";
 import useAxiosInstance from '../../../hooks/useAxiosInstance'; 
 import { HiOutlineArrowRight } from "react-icons/hi";
 import { SocketContext } from "../../../context/SocketContext";
+import  DashboardContext  from "../../../context/DashboardProvider";
 
 
 
 const  AddFriends = () => {
-  const [openModal, setOpenModal] = useState(true);
   
+  const [openModal, setOpenModal] = useState(true);
+  const { friendsRequests, addFriend } = useContext(DashboardContext);
   const [email, setEmail] = useState('');
   const [searchResults, setSearchResults] = useState([]);
   const [selected , setSelected] = useState(false);
@@ -45,19 +47,7 @@ const  AddFriends = () => {
         }
     }
 
-    useEffect(() => {
-        if (socket) {
-          socket.on('friendRequest', (data) => {
-            console.log("Friend request received", data);
-          });
-        }
-        // Clean up the event listener when component unmounts
-        return () => {
-          if (socket) {
-            socket.off('friendRequest');
-          }
-        };
-      }, [socket]);
+    
     
 
   return (

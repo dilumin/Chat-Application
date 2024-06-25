@@ -32,9 +32,13 @@ io.on('connection', (socket) => {
         process.env.ACCESS_TOKEN_SECRET,
         (err, decoded) => {
             if (err) {
-                console.log("TOKEN EXPIRED" , err)
-                return res.status(403).json({ msg: 'Token is not valid  in socketIO' , authFailed:"403" }); //403 is the status code for forbidden ,invalid token                
+                console.log("TOKEN EXPIRED from socket" , err)
+                socket.emit('authError', { msg: 'Token is not valid', authFailed: "403" }); // Send error to client
+                socket.disconnect()
+                return;
+                // return res.status(403).json({ msg: 'Token is not valid  in socketIO' , authFailed:"403" }); //403 is the status code for forbidden ,invalid token                
             }
+
             console.log("TOKEN OKAY" );
             email = decoded.email;
         }
@@ -57,6 +61,7 @@ io.on('connection', (socket) => {
             addFriendRequest(email, friendEmail);
             return;
         }else{
+            addFriendRequest(email, friendEmail);
             socket.to(userSocketMap[friendEmail]).emit('friendRequest', { email });
         }
     })

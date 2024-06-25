@@ -1,13 +1,14 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
 import AuthContext from './AuthProvider';
 import io from 'socket.io-client';
+import { Navigate } from 'react-router-dom';
 
 export const SocketContext = createContext();
 
 export const SocketContextProvider = ({ children }) => {
     const [socket, setSocket] = useState(null);
     const [onlineUsers, setOnlineUsers] = useState([]);
-    const { Auth } = useContext(AuthContext);
+    const { Auth , setAuth } = useContext(AuthContext);
 
     useEffect(() => {
         if (Auth?.accessToken) {
@@ -24,6 +25,13 @@ export const SocketContextProvider = ({ children }) => {
             newSocket.on('disconnect', () => {
                 console.log('Socket disconnected');
                 setOnlineUsers([]);
+            });
+            newSocket.on('authError', (users) => {
+                localStorage.removeItem('accessToken');
+
+                Navigate('/login');
+                //remove local storage
+                // return;
             });
 
             setSocket(newSocket);
