@@ -44,19 +44,18 @@ CREATE TABLE IF NOT EXISTS RefreshTokens (
 );
 
 CREATE TABLE IF NOT EXISTS FriendList (
-            user_id INT,
-            friend_id INT,
+            user_email VARCHAR(50),
+            friend_email VARCHAR(50),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-            FOREIGN KEY (user_id) REFERENCES Users(user_id),
-            FOREIGN KEY (friend_id) REFERENCES Users(user_id)
+            FOREIGN KEY (user_email) REFERENCES Users(email),
+            FOREIGN KEY (friend_email) REFERENCES Users(email)
 );
 
 CREATE TABLE IF NOT EXISTS FriendRequests (
             user_email VARCHAR(100),
             friend_email VARCHAR(100),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-            FOREIGN KEY (user_email) REFERENCES Users(email),
-            FOREIGN KEY (friend_email) REFERENCES Users(email)
+
 
 );
 

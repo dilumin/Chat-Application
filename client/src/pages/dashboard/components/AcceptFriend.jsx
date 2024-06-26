@@ -36,10 +36,11 @@ function AcceptFriend() {
 
     useEffect(() => {
         getRequestsfromDB();
-    }, []);
-    useEffect(() => {
-        getAllFriends();
-    }, [friendsRequests]);
+        console.log("MYYYY EMAILL ISS" , myEmail)
+    }, [myEmail]);
+    // useEffect(() => {
+    //     getAllFriends();
+    // }, [friendsRequests]);
 
     useEffect(() => {
         if (socket) {

@@ -20,7 +20,7 @@ async function myPeople(email){
 
 async function addFriend(userEmail, friendEmail){
     try{
-        await db.query("INSERT INTO friendlist (user_id, friend_id) VALUES (?, ?)", [userEmail, friendEmail]);
+        await db.query("INSERT INTO friendlist (user_email, friend_email) VALUES (?, ?)", [userEmail, friendEmail]);
 
         
     }catch(error){

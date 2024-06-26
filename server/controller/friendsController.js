@@ -45,7 +45,7 @@ const getFriendRequests = async (req, res) => {
     try {
         const requests = await DB.getfriendRequests(email);
         console.log(requests);
-        const reqs = requests.map((request) => request.friend_email);
+        const reqs = requests.map((request) => request.user_email);
         console.log(reqs);
         return res.status(200).json(reqs);
     } catch (error) {
@@ -65,7 +65,6 @@ const HandleFriendRequest = async (req, res) => {
         if (accepted) {
             try{
             await DB.addFriend(userEmail, friendEmail);
-            await DB.addFriend(friendEmail, userEmail);
             await DB.deleteFriendRequest(friendEmail, userEmail);
             return res.status(200).json({messageFromFriend: 'Friend added'});
             }catch(error){
