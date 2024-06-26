@@ -7,6 +7,8 @@ const DashboardContext = createContext();
 export const DashboardProvider = ({ children }) => {
     const axiosInstance = useAxiosInstance();
     const [MyInfo, setMyInfo] = useState({});
+    const [friends , setFriends] = useState([]);
+
 
 
     const getEmail = async () => {
@@ -21,7 +23,7 @@ export const DashboardProvider = ({ children }) => {
 
     
   return (
-    <DashboardContext.Provider value={{ MyInfo , setMyInfo  }}>
+    <DashboardContext.Provider value={{ MyInfo , setMyInfo , friends , setFriends  }}>
       {children}
     </DashboardContext.Provider>
   );

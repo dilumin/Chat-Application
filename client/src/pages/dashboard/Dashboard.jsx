@@ -16,7 +16,7 @@ const Dashboard = () => {
             <AcceptFriend />
             <AddFriends />
             {/* Uncomment as needed */}
-            {/* <ShowFriends /> */}
+            <ShowFriends />
             {/* <ContactList /> */}
         </div>
     );
