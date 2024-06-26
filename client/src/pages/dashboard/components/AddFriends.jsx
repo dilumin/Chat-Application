@@ -11,7 +11,7 @@ import  DashboardContext  from "../../../context/DashboardProvider";
 
 const  AddFriends = () => {
   
-  const [openModal, setOpenModal] = useState(true);
+  const [openModal, setOpenModal] = useState(false);
   const { friendsRequests, addFriend } = useContext(DashboardContext);
   const [email, setEmail] = useState('');
   const [searchResults, setSearchResults] = useState([]);
@@ -78,7 +78,7 @@ const  AddFriends = () => {
                 }
 
 
-                } >Log in to your account</Button>
+                } >Search</Button>
                 </div>
 
                 <div>

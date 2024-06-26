@@ -44,9 +44,9 @@ const getFriendRequests = async (req, res) => {
     }
     try {
         const requests = await DB.getfriendRequests(email);
-        console.log(requests);
-        const reqs = requests.map((request) => request.user_email);
-        console.log(reqs);
+        // console.log(requests);
+        const reqs = requests.map((request) => request.friend_email);
+        // console.log(reqs);
         return res.status(200).json(reqs);
     } catch (error) {
         console.log(error);

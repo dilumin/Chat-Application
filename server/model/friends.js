@@ -7,7 +7,6 @@ async function myFriends(email){
         const friend2 = await db.query("SELECT user_email from friendlist WHERE friend_email = ? ", [email]);
         const friend2Array = friend2[0].map((friend) => friend.user_email);
         const allFriends = friends1Array.concat(friend2Array);
-        console.log("This is what I get",allFriends);
         return allFriends;
     }catch(error){
         console.log(error);
