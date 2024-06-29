@@ -17,6 +17,15 @@ export const SocketContextProvider = ({ children }) => {
                     accessToken:localStorage.getItem('accessToken')|| "",
                 },
             });
+            newSocket.on('authError', (users) => {
+                localStorage.removeItem('accessToken');
+                window.location.reload();
+
+                // Navigate('/login');
+                //remove local storage
+                // return;
+            });
+            
 
             newSocket.on('connect', () => {
                 console.log('Socket connected');
@@ -26,13 +35,7 @@ export const SocketContextProvider = ({ children }) => {
                 console.log('Socket disconnected');
                 setOnlineUsers([]);
             });
-            newSocket.on('authError', (users) => {
-                localStorage.removeItem('accessToken');
-
-                Navigate('/login');
-                //remove local storage
-                // return;
-            });
+            
 
             setSocket(newSocket);
 

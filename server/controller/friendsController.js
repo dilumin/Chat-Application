@@ -1,5 +1,6 @@
 
 const DB = require('../model/friends');
+const { io , userSocketMap } = require( '../socket/socket');
 
 const getFriends = async (req, res) => {
     const email = req.body.email;
@@ -44,9 +45,9 @@ const getFriendRequests = async (req, res) => {
     }
     try {
         const requests = await DB.getfriendRequests(email);
-        // console.log(requests);
-        const reqs = requests.map((request) => request.friend_email);
-        // console.log(reqs);
+        console.log(requests);
+        const reqs = requests.map((request) => request.user_email);
+        console.log(reqs);
         return res.status(200).json(reqs);
     } catch (error) {
         console.log(error);
@@ -66,6 +67,11 @@ const HandleFriendRequest = async (req, res) => {
             try{
             await DB.addFriend(userEmail, friendEmail);
             await DB.deleteFriendRequest(friendEmail, userEmail);
+            if (userSocketMap[friendEmail]) {
+                io.to(userSocketMap[friendEmail]).emit('friendRequestAccepted', { email: userEmail });
+            }
+
+
             return res.status(200).json({messageFromFriend: 'Friend added'});
             }catch(error){
                 console.log("Adding friend and deleting friend request error", error);
@@ -76,7 +82,7 @@ const HandleFriendRequest = async (req, res) => {
         }
     }catch(error){
         console.log(error);
-        res.status(500).json({message: 'Error at hhandleFriendRequest'});
+        res.status(500).json({message: 'Error at handleFriendRequest'});
     }
 }
 

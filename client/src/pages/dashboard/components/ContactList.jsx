@@ -29,7 +29,7 @@ function ContactList() {
         <ul className="menu bg-base-200 rounded-box w-56">
             <button onClick={getData} > Refresh </button>
             {friends.map((friend) => (
-                <li><a>{friend.username}</a></li>))
+                <li><a>{friend?.username}</a></li>))
             }
 
         </ul>

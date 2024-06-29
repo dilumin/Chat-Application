@@ -80,4 +80,4 @@ io.on('disconnect', (socket) => {
     console.log('a user disconnected ' , socket.id);
 })
 
-module.exports = { app ,io , server };    
+module.exports = { app ,io , userSocketMap , server };    

@@ -13,7 +13,7 @@ export const DashboardProvider = ({ children }) => {
 
     const getEmail = async () => {
         const accessToken = localStorage.getItem('accessToken');
-        const res = await axiosInstance.post('/myinfo', { accessToken }).then((res) => setMyInfo(res.data));
+        const res = await axiosInstance.post('/myinfo', { accessToken }).then((res) => setMyInfo(res?.data));
     };
 
 

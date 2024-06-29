@@ -9,11 +9,14 @@ import  DashboardContext  from "../../../context/DashboardProvider";
 
 
 
+
 const  AddFriends = () => {
   
   const [openModal, setOpenModal] = useState(false);
-  const { friendsRequests, addFriend } = useContext(DashboardContext);
+  const { MyInfo , friends , setFriends} = useContext(DashboardContext);
+  
   const [email, setEmail] = useState('');
+//   setEmail(MyInfo.email);
   const [searchResults, setSearchResults] = useState([]);
   const [selected , setSelected] = useState(false);
   const axiosInstance = useAxiosInstance();

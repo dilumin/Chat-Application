@@ -7,12 +7,11 @@ import useAxiosInstance from '../../../hooks/useAxiosInstance';
 
 function AcceptFriend() {
 
-    const { MyInfo } = useContext(DashboardContext);
+    const { MyInfo , friends , setFriends} = useContext(DashboardContext);
     const myEmail = MyInfo.email;
 
     const axiosInstance = useAxiosInstance();
     const {socket} = useContext(SocketContext);
-    // const { addFriend ,  friendsRequests } = useContext(DashboardContext);
 
     const getAllFriends = async () => {
         try {
@@ -62,6 +61,7 @@ function AcceptFriend() {
         try {
             const res = await axiosInstance.post('/acceptFriendRequest', { myEmail ,Oemail , accepted });
             console.log('RESPOSE FROM ADD FRIEND:', res);
+            setFriends([...friends, Oemail]);
             setFriendRequests(friendsRequests.filter((friend) => friend !== Oemail));
         } catch (error) {
             console.error('Error sending POST request:', error);

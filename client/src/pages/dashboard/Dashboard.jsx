@@ -13,7 +13,7 @@ const Dashboard = () => {
 
     return (
         <div>
-            <h1>{MyInfo.username}</h1>
+            <h1>{MyInfo?.username}</h1>
             {/* <Test1 /> */}
             <AcceptFriend />
             <Chatbox />
