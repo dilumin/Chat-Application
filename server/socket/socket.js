@@ -5,6 +5,7 @@ const DB = require('../model/friends');
 const jwt = require('jsonwebtoken');
 //to get env for the jwts secret
 const path = require('path');
+const messageDB = require('../model/messages');
 require('dotenv').config( {path:path.resolve(__dirname,'../.env')})
 
 const app = express();
@@ -65,6 +66,25 @@ io.on('connection', (socket) => {
             socket.to(userSocketMap[friendEmail]).emit('friendRequest', { email });
         }
     })
+    
+    socket.on('messaging', ({ sender, receiver, message }) => {
+        console.log(`Message from ${sender} to ${receiver}: ${message}`);
+        
+        // Optionally, save the message to the database here
+        const saveMessage = async ()=>{
+            await messageDB.AddMsgToDb(sender, receiver, message);
+        }
+        saveMessage();
+    
+        if (userSocketMap[receiver]) {
+          socket.to(userSocketMap[receiver]).emit('newMessage', { sender, message });
+        } else {
+          console.log('Receiver is offline');
+          // Optionally, handle storing unsent messages for later delivery
+        }
+      });
+
+
 
 
 

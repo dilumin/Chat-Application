@@ -1,96 +1,86 @@
-
-import React, { useEffect  } from 'react'
-import { useContext } from 'react';
-import  DashboardContext  from "../../../context/DashboardProvider";
+import React, { useEffect, useContext } from 'react';
+import DashboardContext from "../../../context/DashboardProvider";
 import useAxiosInstance from '../../../hooks/useAxiosInstance';
 import AddFriends from './AddFriends';
-
-
-
+import MessageContext from '../../../context/MessageProvider';
 import { Sidebar } from "flowbite-react";
-import {  HiUser , HiLogout } from "react-icons/hi";
+import { HiUser, HiLogout } from "react-icons/hi";
 import { SocketContext } from '../../../context/SocketContext';
 
-
-
 function ShowFriends() {
-  const {socket} = useContext(SocketContext);
-    const axiosInstance = useAxiosInstance();
-    const { MyInfo ,friends , setFriends } = useContext(DashboardContext);
-    const Myemail = MyInfo.email;
+  const { socket } = useContext(SocketContext);
+  const axiosInstance = useAxiosInstance();
+  const { MyInfo, friends, setFriends } = useContext(DashboardContext);
+  const MyEmail = MyInfo.email;
+  const { selectedFriend, setSelectedFriend, refresh, setRefresh } = useContext(MessageContext);
 
-    const getFriends = async () => {
-        try {
-            const res = await axiosInstance.post('/getFriends', { "email":Myemail });
-            console.log('ALL FRIENDS AREE:', res.data.friends);
-            setFriends(res.data.friends);
-        } catch (error) {
-            console.error('Error fetching contacts:', error);
-        }}
+  // Fetch friends list from server
+  const getFriends = async () => {
+    try {
+      const res = await axiosInstance.post('/getFriends', { email: MyEmail });
+      setFriends(res.data.friends);
+    } catch (error) {
+      console.error('Error fetching contacts:', error);
+    }
+  }
 
-        useEffect(() => {
-            getFriends();           
-        }, [Myemail]);
+  useEffect(() => {
+    getFriends();
+  }, [MyEmail]);
 
-        const handleLogout = async () => { 
-            localStorage.removeItem('accessToken');
-            window.location.reload();
-            try{
-             await axiosInstance.post('/logout', { "email":Myemail });
-            }catch (error) {
-                console.error('Error fetching loging out:', error);
-            }
-        }
+  // Handle logout
+  const handleLogout = async () => {
+    localStorage.removeItem('accessToken');
+    window.location.reload(); // Reloading page to reset state
+    try {
+      await axiosInstance.post('/logout', { email: MyEmail });
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  }
 
-        useEffect(() => {
-          if (socket) {
-            socket.on('friendRequestAccepted', (data) => {
-              console.log("Friend request received", data);
-              setFriends([...friends, data.email]);
-              console.log("ALL", friends);
-            });
-          }
-          // Clean up the event listener when component unmounts
-          return () => {
-            if (socket) {
-              socket.off('friendRequestAccepted');
-            }
-          };
-        }, [socket]);
-    
-    
+  // Listen for friend request acceptance
+  useEffect(() => {
+    if (socket) {
+      socket.on('friendRequestAccepted', (data) => {
+        // Update friends list when a friend request is accepted
+        setFriends(prevFriends => [...prevFriends, data.email]);
+      });
+    }
+    return () => {
+      if (socket) {
+        socket.off('friendRequestAccepted');
+      }
+    };
+  }, [socket, setFriends]);
+
   return (
-    <div className="fixed top-0 left-0 " >
-        <div className="">
-              <div> <Sidebar aria-label="Sidebar with logo branding example">
-
-        <Sidebar.Logo >
-            <div className='text-lg' > ChaT APP</div>
+    <div className="fixed top-0 left-0">
+      <Sidebar aria-label="Sidebar with logo branding example">
+        <Sidebar.Logo>
+          <div className='text-lg'>Chat App</div>
         </Sidebar.Logo>
+        <h1>{MyInfo?.username}</h1>
         <AddFriends />
         <Sidebar.Items>
           <Sidebar.ItemGroup>
-
             {friends.map((friend) => (
-              <Sidebar.Item href="#" icon={HiUser}>
-              {friend}
-            </Sidebar.Item>
-            ))}            
-            <Sidebar.Item onClick= {handleLogout} icon={HiLogout}>
+              <Sidebar.Item key={friend} onClick={() => {
+                setSelectedFriend(friend);
+                console.log("SELECTED FRIEND CHANGED", friend);
+                setRefresh(prev => !prev);
+              }} icon={HiUser}>
+                {friend}
+              </Sidebar.Item>
+            ))}
+            <Sidebar.Item onClick={handleLogout} icon={HiLogout}>
               Log Out
             </Sidebar.Item>
           </Sidebar.ItemGroup>
         </Sidebar.Items>
-        </Sidebar></div>
-
-
-
-
-
-    </div>
+      </Sidebar>
     </div>
   )
 }
 
-export default ShowFriends
-
+export default ShowFriends;

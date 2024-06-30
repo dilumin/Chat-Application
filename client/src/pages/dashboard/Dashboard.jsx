@@ -7,13 +7,14 @@ import ShowFriends from './components/ShowFriends';
 import Test1 from './components/Test1';
 import DashboardContext, { DashboardProvider } from '../../context/DashboardProvider';
 import Chatbox from './components/Chatbox';
+import { MessageProvider } from '../../context/MessageProvider';
 
 const Dashboard = () => {
     const { MyInfo } = useContext(DashboardContext);
 
     return (
         <div>
-            <h1>{MyInfo?.username}</h1>
+            
             {/* <Test1 /> */}
             <AcceptFriend />
             <Chatbox />
@@ -22,6 +23,7 @@ const Dashboard = () => {
             {/* <AddFriends /> */}
             {/* Uncomment as needed */}
             <ShowFriends />
+            
             {/* <ContactList /> */}
         </div>
     );
@@ -29,7 +31,10 @@ const Dashboard = () => {
 
 const DashboardWrapper = () => (
     <DashboardProvider>
-        <Dashboard />
+        <MessageProvider>
+            <Dashboard />
+        </MessageProvider>   
+            
     </DashboardProvider>
 );
 

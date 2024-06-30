@@ -15,10 +15,10 @@ function Message(props) {
           </div>
           <div className="chat-header">
             {props.username}
-            <time className="text-xs opacity-50">12:46</time>
+            {/* <time className="text-xs opacity-50">12:46</time> */}
           </div>
           <div className="chat-bubble"> {props.msg}</div>
-          <div className="chat-footer opacity-50">Seen at 12:46</div>
+          {/* <div className="chat-footer opacity-50">Seen at 12:46</div> */}
         </div> 
       :
         <div className="chat chat-start">
