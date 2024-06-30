@@ -17,12 +17,17 @@ const Dashboard = () => {
             
             {/* <Test1 /> */}
             <AcceptFriend />
-            <Chatbox />
+            <div className='flex' >
+                <ShowFriends />
+                <Chatbox />
+
+            </div>
+            
             
 
             {/* <AddFriends /> */}
             {/* Uncomment as needed */}
-            <ShowFriends />
+            
             
             {/* <ContactList /> */}
         </div>

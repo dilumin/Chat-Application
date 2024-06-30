@@ -68,7 +68,7 @@ function Chatbox() {
   };
 
   return (
-    <div className="flex flex-col justify-center items-center h-screen bg-gray-100">
+    <div className="w-screen flex flex-col justify-center items-center h-screen bg-gray-100">
       <div className="h-5/6 w-3/4 bg-gray-200 p-6 flex flex-col justify-between rounded-lg shadow-lg overflow-hidden">
         <div className="flex flex-col space-y-4 overflow-y-auto p-4" style={{ maxHeight: 'calc(100% - 60px)' }}>
           {messages.map((message, index) => (

@@ -55,7 +55,7 @@ function ShowFriends() {
   }, [socket, setFriends]);
 
   return (
-    <div className="fixed top-0 left-0">
+    <div className=" top-0 left-0">
       <Sidebar aria-label="Sidebar with logo branding example">
         <Sidebar.Logo>
           <div className='text-lg'>Chat App</div>

@@ -22,7 +22,6 @@ CREATE TABLE Messages (
     user_id INT,
     message_text TEXT NOT NULL,
     sent_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (chat_id) REFERENCES Chats(chat_id),
     FOREIGN KEY (user_id) REFERENCES Users(user_id)
 );
 
@@ -45,6 +44,7 @@ CREATE TABLE IF NOT EXISTS RefreshTokens (
 
 CREATE TABLE IF NOT EXISTS FriendList (
             user_email VARCHAR(50),
+            chat_id INT PRIMARY KEY AUTO_INCREMENT,
             friend_email VARCHAR(50),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
             FOREIGN KEY (user_email) REFERENCES Users(email),
@@ -55,8 +55,6 @@ CREATE TABLE IF NOT EXISTS FriendRequests (
             user_email VARCHAR(100),
             friend_email VARCHAR(100),
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-
-
 );
 
 
