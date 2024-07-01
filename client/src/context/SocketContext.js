@@ -12,7 +12,9 @@ export const SocketContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (Auth?.accessToken) {
-            const newSocket = io('http://localhost:3500', {
+            // const newSocket = io('http://localhost:3500', {
+            const newSocket = io('https://testserver-arap.onrender.com:3500', {
+
                 auth: {
                     accessToken:localStorage.getItem('accessToken')|| "",
                 },
