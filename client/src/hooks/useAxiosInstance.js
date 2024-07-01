@@ -22,7 +22,7 @@ const useAxiosInstance = () => {
     const refreshAccessToken = async () => {
         try {
             // const response = await axios.post('http://localhost:3500/refresh', {}, { withCredentials: true });
-            const response = await axios.post('https://testserver-arap.onrender.com:3500/refresh', {}, { withCredentials: true });
+            const response = await axios.post('https://testserver-arap.onrender.com/refresh', {}, { withCredentials: true });
 
             console.log("Response from refresh token: ", response.data);
             const accessToken = response.data.AccessToken;

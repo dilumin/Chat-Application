@@ -35,7 +35,9 @@ function App() {
         }
 
         try{
-            const response = await fetch('http://localhost:3500/register', {
+            // const response = await fetch('http://localhost:3500/register', {
+            const response = await fetch('https://testserver-arap.onrender.com/register', {
+
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
