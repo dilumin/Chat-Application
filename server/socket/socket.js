@@ -14,7 +14,7 @@ const io = new Server(server
     , {
         cors: {
             
-            origin: "https://chat-application-phi-two.vercel.app:3000",
+            origin: "https://chat-application-phi-two.vercel.app",
 
             // origin: "http://localhost:3000",
             methods: ["GET", "POST"],
