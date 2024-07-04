@@ -39,8 +39,8 @@ function Login() {
         e.preventDefault();
 
         try{
-            // const response = await fetch('http://localhost:3500/login', {
-            const response = await fetch('https://testserver-arap.onrender.com/login', {
+            const response = await fetch(`${process.env.REACT_APP_API_URL}/login`, {
+            // const response = await fetch('https://testserver-arap.onrender.com/login', {
 
                 method: 'POST',
                 headers: {

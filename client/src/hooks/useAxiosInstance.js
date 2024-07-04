@@ -10,9 +10,9 @@ const useAxiosInstance = () => {
     const failedRequestQueue = useRef([]);
 
     const axiosInstance = axios.create({
-        baseURL: 'https://testserver-arap.onrender.com',
+        // baseURL: 'https://testserver-arap.onrender.com',
 
-        // baseURL: 'http://localhost:3500',
+        baseURL: process.env.REACT_APP_API_URL,
         withCredentials: true,
         headers: {
             'Content-Type': 'application/json'
@@ -21,8 +21,8 @@ const useAxiosInstance = () => {
 
     const refreshAccessToken = async () => {
         try {
-            // const response = await axios.post('http://localhost:3500/refresh', {}, { withCredentials: true });
-            const response = await axios.post('https://testserver-arap.onrender.com/refresh', {}, { withCredentials: true });
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}/refresh`, {}, { withCredentials: true });
+            // const response = await axios.post('https://testserver-arap.onrender.com/refresh', {}, { withCredentials: true });
 
             console.log("Response from refresh token: ", response.data);
             const accessToken = response.data.AccessToken;

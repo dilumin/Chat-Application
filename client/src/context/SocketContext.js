@@ -12,8 +12,8 @@ export const SocketContextProvider = ({ children }) => {
 
     useEffect(() => {
         if (Auth?.accessToken) {
-            // const newSocket = io('http://localhost:3500', {
-            const newSocket = io('https://testserver-arap.onrender.com', {
+            const newSocket = io(process.env.REACT_APP_API_URL, {
+            // const newSocket = io('https://testserver-arap.onrender.com', {
 
                 auth: {
                     accessToken:localStorage.getItem('accessToken')|| "",

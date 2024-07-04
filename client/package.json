@@ -8,7 +8,6 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.7.2",
-    "dotenv": "^16.4.5",
     "flowbite": "^2.3.0",
     "flowbite-react": "^0.10.1",
     "mdb-react-ui-kit": "^8.0.0",
