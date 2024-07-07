@@ -4,6 +4,10 @@
 ## Introduction
 Welcome to Chat App! This is a real-time messaging application inspired by WhatsApp. It allows users to add contacts, send messages, and enjoy secure, private conversations.
 
+
+<img width="1268" alt="image" src="https://github.com/dilumin/Chat-Application/assets/77558016/02d50409-30ab-47f6-af27-126fad0962d6">
+
+
 ## Features
 - **User Authentication:** Secure sign-up and login using bcrypt for password hashing.
 - **Real-Time Messaging:** Instant messaging between users.
