@@ -23,7 +23,7 @@ app.use(cookieParser());
 
 app.use('/', router);
 
-// app.use(verifyJWT)
+app.use(verifyJWT)
 app.post('/test', (req, res) => {
     console.log(req.body);
     res.status(200).json({message: 'fuck yaa'});
