@@ -26,15 +26,15 @@ jobs:
         cache: 'npm'
     
     - name: Install dependencies for server
-      working-directory: _work/Chat-Application/Chat-Application/server  # Set the correct path to the server folder
+      working-directory: _work/Chat-Application/ # Set the correct path to the server folder
       run: npm ci
     
     - name: Build the server
-      working-directory: _work/Chat-Application/Chat-Application/server  # Ensure you're in the server directory
+      working-directory: _work/Chat-Application  # Ensure you're in the server directory
       run: npm run build --if-present
     
     - name: Set up environment variables
-      working-directory: _work/Chat-Application/Chat-Application/server  # Stay in the server directory
+      working-directory: _work/Chat-Application/  # Stay in the server directory
       run: |
         touch .env
         echo "${{ secrets.secret }}" > .env
