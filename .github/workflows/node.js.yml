@@ -1,40 +1,28 @@
-name: Node.js CI
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: Node.js CI/CD
 
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
   build:
-
     runs-on: self-hosted
-
     strategy:
       matrix:
         node-version: [20.x]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
-
     steps:
-    - uses: actions/checkout@v4
-    
+    - uses: actions/checkout@v3
     - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
+      uses: actions/setup-node@v3
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
-    
-    - name: Install dependencies for server
-      working-directory: Chat-Application/server  # Use the correct relative path from the repository root
-      run: npm ci
-    
-    - name: Build the server
-      working-directory: Chat-Application/server  # Ensure you're in the server directory
-      run: npm run build --if-present
-    
-    - name: Set up environment variables
-      working-directory: Chat-Application/server  # Stay in the server directory
-      run: |
+    - run: npm ci
+    - run: |
         touch .env
         echo "${{ secrets.secret }}" > .env
+    - run: pm2 restart BackendAPI
