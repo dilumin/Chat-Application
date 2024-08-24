@@ -25,17 +25,17 @@ jobs:
         cache: 'npm'
     
     - name: Install dependencies
-      run: |
-        cd server
-        npm ci
+    - run: |
+        cd /home/ubuntu/actions-runner/_work/Chat-Application/Chat-Application/server
+        npm i
     
     - name: Build project
-      run: |
-        cd server
+    - run: |
+        cd /home/ubuntu/actions-runner/_work/Chat-Application/Chat-Application/server
         npm run build --if-present
     
     - name: Set up environment variables
       run: |
-        cd server
+        cd /home/ubuntu/actions-runner/_work/Chat-Application/Chat-Application/server
         touch .env
         echo "${{ secrets.secret }}" > .env
