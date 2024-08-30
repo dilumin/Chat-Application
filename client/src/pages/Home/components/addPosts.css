@@ -1,0 +1,7 @@
+.hell {
+    max-height: 0;
+    height: 0;
+    overflow: hidden;
+    transition: height 1s opacity 1s ;
+    opacity: 0;
+}

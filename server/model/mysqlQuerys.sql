@@ -57,6 +57,17 @@ CREATE TABLE IF NOT EXISTS FriendRequests (
             created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE IF NOT EXISTS Posts (
+            post_id INT PRIMARY KEY AUTO_INCREMENT,
+            user_id INT,
+            post_text TEXT NOT NULL,
+            img_url TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+ALTER TABLE Posts ADD CONSTRAINT fk_user_id FOREIGN KEY (user_id) REFERENCES Users(user_id);
+
+
+
 
 
 

@@ -62,7 +62,7 @@ async function getRefreshToken(token){
 async function getUserfromRefreshToken(token){
     
     const user1 = await getRefreshToken(token).then(async (userID) =>  {
-        const user = await db.query('SELECT * FROM users WHERE user_id = ?' , [userID[0]?.user_id]);
+        const user = await db.query('SELECT * FROM users WHERE user_id = ?' , [userID[0].user_id]);
         console.log("The user is :" , user[0]);
         return user[0];
     }).catch((error) => {

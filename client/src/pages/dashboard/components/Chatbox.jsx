@@ -13,6 +13,7 @@ function Chatbox() {
   const MyEmail = MyInfo.email;
   const { selectedFriend, lastSent, refresh, sent } = useContext(MessageContext);
 
+
   const [messages, setMessages] = useState([]);
   const messagesEndRef = useRef(null); // Ref for the end of messages container
 
@@ -53,6 +54,7 @@ function Chatbox() {
   useEffect(() => {
     if (lastSent) {
       setMessages(prevMessages => [...prevMessages, { me: "true", msg: lastSent }]);
+      console.log('Last sent:', lastSent);
     }
   }, [lastSent, sent]);
 
@@ -68,9 +70,16 @@ function Chatbox() {
   };
 
   return (
-    <div className="w-screen flex flex-col justify-center items-center h-screen bg-gray-100">
-      <div className="h-5/6 w-3/4 bg-gray-200 p-6 flex flex-col justify-between rounded-lg shadow-lg overflow-hidden">
-        <div className="flex flex-col space-y-4 overflow-y-auto p-4" style={{ maxHeight: 'calc(100% - 60px)' }}>
+    <div className="w-screen flex flex-col justify-center items-center h-screen bg-gray-100"
+    >
+      <div 
+        className="h-5/6 w-3/4 bg-gray-200 p-6 flex flex-col justify-between rounded-lg shadow-lg overflow-hidden"
+
+      >
+        <div 
+          className="flex flex-col space-y-4 overflow-y-auto p-4" 
+          style={{ maxHeight: 'calc(100% - 60px)' }}
+        >
           {messages.map((message, index) => (
             <Message key={index} msg={message.msg} Me={message.me} />
           ))}
@@ -78,6 +87,7 @@ function Chatbox() {
         </div>
         <Input />
       </div>
+
     </div>
   );
 }

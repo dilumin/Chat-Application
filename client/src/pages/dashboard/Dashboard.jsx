@@ -14,22 +14,12 @@ const Dashboard = () => {
 
     return (
         <div>
-            
-            {/* <Test1 /> */}
             <AcceptFriend />
             <div className='flex' >
                 <ShowFriends />
                 <Chatbox />
 
             </div>
-            
-            
-
-            {/* <AddFriends /> */}
-            {/* Uncomment as needed */}
-            
-            
-            {/* <ContactList /> */}
         </div>
     );
 };
