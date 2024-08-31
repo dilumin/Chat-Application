@@ -31,6 +31,7 @@ Welcome to Chat App! This is a real-time messaging application inspired by Whats
 - **Frontend:** React
 - **Backend:** Node.js, Express.js
 - **Database:** MySQL
+- **Storage:** AWS S3 Bucket 
 - **Authentication:** bcrypt for password hashing
 - **Real-Time Communication:** Socket.io
 
