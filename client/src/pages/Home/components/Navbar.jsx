@@ -4,12 +4,15 @@ import { useContext } from 'react';
 import './Navbar.css';
 import chat from './chat-svgrepo-com (1).svg';
 import { useNavigate } from 'react-router-dom';
+import useAxiosInstance from '../../../hooks/useAxiosInstance';
 
 function Navbar() {
   const [search, setSearch] = useState('');
   const { profileDropDown, setProfileDropDown, MyInfo, friends } =
     useContext(HomeContext);
   const navigate = useNavigate();
+  const axiosInstance = useAxiosInstance();
+  const MyEmail = MyInfo.email;
 
   const profileRef = useRef(null);
 
@@ -26,9 +29,19 @@ function Navbar() {
     };
   }, [profileDropDown, setProfileDropDown]);
 
+  const handleLogout = async () => {
+    localStorage.removeItem('accessToken');
+    window.location.reload(); // Reloading page to reset state
+    try {
+      await axiosInstance.post('/logout', { email: MyEmail });
+    } catch (error) {
+      console.error('Error logging out:', error);
+    }
+  };
+
   return (
     <div>
-      <div className="navbar-con w-full bg-slate-300 h-16 flex items-center justify-between px-4">
+      <div className="navbar-con w-full fixed bg-slate-300 h-16 flex items-center justify-between px-4">
         <div className="logo text-black font-bold text-xl">PhotoNia</div>
         <div className="flex-1 flex justify-center">
           <div className="input-con w-2/5 bg-white rounded-lg">
@@ -65,8 +78,11 @@ function Navbar() {
           <div className="chec border-black cursor-pointer p-2 text-white">
             Profile
           </div>
-          <div className="chec border-black cursor-pointer p-2 text-white">
-            Sign Out
+          <div
+            className="chec border-black cursor-pointer p-2 text-white"
+            onClick={handleLogout}
+          >
+            Log Out
           </div>
         </div>
       )}

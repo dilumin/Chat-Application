@@ -6,6 +6,8 @@ import MessageContext from '../../../context/MessageProvider';
 import { Sidebar } from 'flowbite-react';
 import { HiUser, HiLogout } from 'react-icons/hi';
 import { SocketContext } from '../../../context/SocketContext';
+import social from './social-photobucket-svgrepo-com.svg';
+import { useNavigate } from 'react-router-dom';
 
 function ShowFriends() {
   const { socket } = useContext(SocketContext);
@@ -14,6 +16,7 @@ function ShowFriends() {
   const MyEmail = MyInfo.email;
   const { selectedFriend, setSelectedFriend, refresh, setRefresh } =
     useContext(MessageContext);
+  const navigate = useNavigate();
 
   // Fetch friends list from server
   const getFriends = async () => {
@@ -38,6 +41,10 @@ function ShowFriends() {
     } catch (error) {
       console.error('Error logging out:', error);
     }
+  };
+
+  const goToWall = () => {
+    navigate('/');
   };
 
   // Listen for friend request acceptance
@@ -78,6 +85,12 @@ function ShowFriends() {
                 {friend}
               </Sidebar.Item>
             ))}
+            <Sidebar.Item onClick={goToWall}>
+              <div className="flex justify-center">
+                <img src={social} className="w-12" alt="" />
+              </div>
+            </Sidebar.Item>
+
             <Sidebar.Item onClick={handleLogout} icon={HiLogout}>
               Log Out
             </Sidebar.Item>

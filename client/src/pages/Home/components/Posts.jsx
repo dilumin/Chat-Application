@@ -31,7 +31,7 @@ function Posts() {
 
   return (
     <div className="transition-all ease-in-out w-full flex justify-center">
-      <div className="w-full ml-72">
+      <div className="w-full ">
         {posts.map((post) => (
           <Post
             key={post.id}
