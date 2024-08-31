@@ -1,9 +1,9 @@
-import React from 'react'
+import React from 'react';
 
 function Message(props) {
   return (
     <div>
-      {props.Me ? 
+      {props.Me ? (
         <div className="chat chat-end">
           <div className="chat-image avatar">
             <div className="w-10 rounded-full">
@@ -19,8 +19,8 @@ function Message(props) {
           </div>
           <div className="chat-bubble"> {props.msg}</div>
           {/* <div className="chat-footer opacity-50">Seen at 12:46</div> */}
-        </div> 
-      :
+        </div>
+      ) : (
         <div className="chat chat-start">
           <div className="chat-image avatar">
             <div className="w-10 rounded-full">
@@ -37,9 +37,9 @@ function Message(props) {
           <div className="chat-bubble">{props.msg}</div>
           <div className="chat-footer opacity-50">Delivered</div>
         </div>
-      }
+      )}
     </div>
-  )
+  );
 }
 
-export default Message
+export default Message;

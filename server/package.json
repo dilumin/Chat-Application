@@ -8,19 +8,21 @@
     "start": "node server.js",
     "dev": "nodemon server.js",
     "build": "echo \"Error: no build specified\" && exit 1"
-    
-
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.637.0",
+    "@aws-sdk/s3-request-presigner": "^3.637.0",
+    "aws-sdk": "^2.1687.0",
     "bcrypt": "^5.1.1",
     "cookie-parser": "^1.4.6",
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jsonwebtoken": "^9.0.2",
+    "multer": "^1.4.5-lts.1",
     "mysql2": "^3.10.1",
     "socket.io": "^4.7.5"
   },

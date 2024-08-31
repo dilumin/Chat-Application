@@ -58,6 +58,6 @@ async function deleteFriendRequest(userEmail, friendEmail){
     }
 }
 
-module.exports = {myFriends , myPeople , friendRequestSent , getfriendRequests , deleteFriendRequest , addFriend , myFriends };
+module.exports = {myFriends , myPeople , friendRequestSent , getfriendRequests , deleteFriendRequest , addFriend  };
 
 
