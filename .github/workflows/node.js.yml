@@ -29,7 +29,6 @@ jobs:
     - name: Install dependencies
       run: |
         ls
-        sudo npm install
         npm ci
       working-directory: ./server
     
