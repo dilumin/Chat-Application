@@ -19,16 +19,16 @@ jobs:
     steps:
     - uses: actions/checkout@v4
     - name: Use Node.js 
-      run: |
-        ls        
+      # run: |
+      #   ls        
       
     
-      # uses: actions/setup-node@v4
+      uses: actions/setup-node@v4
       
       
-      # with:
-      #   node-version: ${{ matrix.node-version }}
-      #   cache: 'npm'
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
     
     - name: Install dependencies
       run: |
