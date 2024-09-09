@@ -15,6 +15,10 @@ router.get("/", (req, res) => {
   res.json({ message: "Hello World, AWS here we comeee" });
 });
 
+router.get("/chaa", (req, res) => {
+  res.json({ message: "AWSSSSS WORKS" });
+});
+
 router.post("/register", registerController.handleNewUser);
 router.post("/login", authController.handleAuth);
 router.post("/refresh", refreshController.handleRefresh);
