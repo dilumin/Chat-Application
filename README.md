@@ -8,6 +8,17 @@ Welcome to Chat App! This is a real-time messaging application inspired by Whats
 <img width="1268" alt="image" src="https://github.com/dilumin/Chat-Application/assets/77558016/02d50409-30ab-47f6-af27-126fad0962d6">
 
 
+## New Features (Implemented)
+- A **Social Media** Wall is Introduced for Users to add posts with/without Photos for their friends to see
+- The Photos of th Posts are uploaded and retrieved from an AWS S3 Bucket 
+  
+  <img width="1280" alt="Screenshot 2024-08-31 232851" src="https://github.com/user-attachments/assets/e821da6d-d97f-4deb-8e0a-b5a5f95585a1">
+
+
+
+
+
+
 ## Features
 - **User Authentication:** Secure sign-up and login using bcrypt for password hashing.
 - **Real-Time Messaging:** Instant messaging between users.
@@ -20,6 +31,7 @@ Welcome to Chat App! This is a real-time messaging application inspired by Whats
 - **Frontend:** React
 - **Backend:** Node.js, Express.js
 - **Database:** MySQL
+- **Storage:** AWS S3 Bucket 
 - **Authentication:** bcrypt for password hashing
 - **Real-Time Communication:** Socket.io
 
