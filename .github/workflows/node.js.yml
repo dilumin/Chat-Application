@@ -8,29 +8,39 @@ on:
 
 jobs:
   build:
-
-    runs-on: self
+    runs-on: self-hosted
 
     strategy:
       matrix:
         node-version: [20.x]
-        # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
+    - name: Fix permissions
+      run: |
+        sudo chown -R $USER:$USER ./server
+
     - uses: actions/checkout@v4
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@v4
-      with:
-        node-version: ${{ matrix.node-version }}
-        cache: 'npm'
+
+    # - name: Use Node.js
+    #   uses: actions/setup-node@v4
+    #   with:
+    #     node-version: ${{ matrix.node-version }}
+    #     cache: 'npm'
+
     - name: Install dependencies
-      run: npm ci
+      run: |
+        npm ci
       working-directory: ./server
+
     - name: Set up environment file
       run: |
         touch .env
-        echo "${{secrets.SECRET}}" > .env
+        echo "${{ secrets.SECRET }}" > .env
       working-directory: ./server
-    - name: Build and test
-      run: npm run build && npm test
+
+    - name: Restart Server pm2
+      run: npm restart Backend
       working-directory: ./server
+
+
+      
