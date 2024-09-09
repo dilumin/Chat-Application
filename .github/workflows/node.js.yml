@@ -39,6 +39,7 @@ jobs:
 
     - name: Restart Server with PM2
       run: |
-        pm2 stop Backend || true  # Stop the previous instance if it exists
+        
+        pm2 stop all  # Stop the previous instance if it exists
         pm2 start server.js --name=Backend  # Start or restart the server
       working-directory: ./server
