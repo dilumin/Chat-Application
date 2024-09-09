@@ -16,20 +16,19 @@ jobs:
 
     steps:
     - name: Fix permissions
-      run: |
-        sudo chown -R $USER:$USER ./server
+      run: sudo chown -R $USER:$USER ./server
 
-    - uses: actions/checkout@v4
+    - name: Checkout code
+      uses: actions/checkout@v4
 
-    # - name: Use Node.js
-    #   uses: actions/setup-node@v4
-    #   with:
-    #     node-version: ${{ matrix.node-version }}
-    #     cache: 'npm'
+    - name: Install Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ matrix.node-version }}
+        cache: 'npm'
 
     - name: Install dependencies
-      run: |
-        npm ci
+      run: npm ci
       working-directory: ./server
 
     - name: Set up environment file
@@ -38,9 +37,8 @@ jobs:
         echo "${{ secrets.SECRET }}" > .env
       working-directory: ./server
 
-    - name: Restart Server pm2
-      run: npm restart Backend
+    - name: Restart Server with PM2
+      run: |
+        pm2 stop Backend || true  # Stop the previous instance if it exists
+        pm2 start server.js --name=Backend  # Start or restart the server
       working-directory: ./server
-
-
-      
