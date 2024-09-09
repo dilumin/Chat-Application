@@ -33,7 +33,7 @@ jobs:
     - name: Install dependencies
       run: |
         ls
-       cd server
+        cd server
 
         npm ci
       working-directory: ./server
