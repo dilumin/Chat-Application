@@ -12,7 +12,7 @@ const multer = require("multer");
 const upload = multer();
 
 router.get("/", (req, res) => {
-  res.json({ message: "Hello World" });
+  res.json({ message: "Hello World, AWS here we comeee" });
 });
 
 router.post("/register", registerController.handleNewUser);
