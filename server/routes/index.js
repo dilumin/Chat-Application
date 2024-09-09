@@ -11,7 +11,7 @@ const postController = require("../controller/postController");
 const multer = require("multer");
 const upload = multer();
 
-router.get("/", (req, res) => {
+router.get("/k", (req, res) => {
   res.json({ message: "Hello World, AWS here we comeee" });
 });
 
