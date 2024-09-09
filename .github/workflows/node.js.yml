@@ -23,15 +23,13 @@ jobs:
       with:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
+    
     - name: Install dependencies
-      run: |
-        cd server
-        npm ci
+      run: npm ci
       working-directory: ./server
+    
     - name: Set up environment file
       run: |
-        cd server
         touch .env
         echo "${{secrets.SECRET}}" > .env
       working-directory: ./server
-
