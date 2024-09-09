@@ -1,6 +1,5 @@
 import { Button, Modal } from 'flowbite-react';
 import { useState, useContext } from 'react';
-import { HiOutlineExclamationCircle } from 'react-icons/hi';
 import React from 'react';
 import photoAdd from './add_photo_alternate_outlined.svg';
 import useAxiosInstanceForm from '../../../hooks/useAxiosInstanceForm';

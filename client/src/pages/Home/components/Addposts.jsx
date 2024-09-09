@@ -31,6 +31,8 @@ function Addposts() {
     }
   };
 
+  const HandlePhoto = async () => {};
+
   return (
     <div className="ml-7 mr-7">
       <div className="pt-3 pb-3 flex">

@@ -60,7 +60,7 @@ function Chatbox() {
     if (selectedFriend !== '') {
       getMessagesFromDB();
     }
-  }, [selectedFriend, refresh]); // Fetch messages when selectedFriend changes
+  }, [selectedFriend, refresh]); 
 
   useEffect(() => {
     if (lastSent) {

@@ -41,7 +41,7 @@ function Navbar() {
 
   return (
     <div>
-      <div className="navbar-con w-full fixed bg-slate-300 h-16 flex items-center justify-between px-4">
+      <div className="navbar-con w-full bg-slate-300 h-16 flex items-center justify-between px-4">
         <div className="logo text-black font-bold text-xl">PhotoNia</div>
         <div className="flex-1 flex justify-center">
           <div className="input-con w-2/5 bg-white rounded-lg">
