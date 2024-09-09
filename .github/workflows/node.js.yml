@@ -36,7 +36,11 @@ jobs:
       run: |
         touch .env
         echo "${{ secrets.SECRET }}" > .env
-        run: npm restart Backend
       working-directory: ./server
+
+    - name: Restart Server pm2
+      run: npm restart Backend
+      working-directory: ./server
+
 
       
